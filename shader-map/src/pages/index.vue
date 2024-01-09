@@ -108,7 +108,7 @@ onMounted(() => {
             <span style="--i: 6">G</span>
         </div>
     </div>
-</div>
+  </div>
 </template>
 
 <style scoped lang="less">

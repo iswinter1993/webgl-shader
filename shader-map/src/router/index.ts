@@ -5,10 +5,20 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Index',
         meta: {
         title: '首页',
-        keepAlive: true,
+        keepAlive: false,
         requireAuth: true
         },
         component: () => import('@/pages/index.vue')
+    },
+    {
+        path: '/img',
+        name: 'img',
+        meta: {
+        title: '图片',
+        keepAlive: true,
+        requireAuth: true
+        },
+        component: () => import('@/pages/imgshader/index.vue')
     }
 
 ]
