@@ -13,6 +13,8 @@
             </div>
         </div>
     </div>
+    <div id="el">Hello World</div>
+    <div id="el1">Shader</div>
     <div class="gallery">
         <img class="gallery-item" :src="img1" crossorigin="anonymous" alt="" />
         <img class="gallery-item" :src="img2" crossorigin="anonymous" alt="" />
@@ -65,7 +67,17 @@ body {
     margin: 0;
     overflow: hidden;
 }
-
+#el,#el1{
+    color: burlywood;
+    position: absolute;
+    z-index: 100;
+    font-size: 60px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: bolder;
+}
+#el1{
+    top: 100px;
+}
 #sketch1 {
     width: 100vw;
     height: 100vh;

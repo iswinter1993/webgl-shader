@@ -5,14 +5,14 @@ const htmlPlugin = () => {
             return{
                 html,
                 tags:[
-                    // {
-                    //     // 放到 body 末尾，可取值还有`head`|`head-prepend`|`body-prepend`，顾名思义
-                    //     injectTo: 'body',
-                    //     // 标签属性定义
-                    //     attrs: { src: 'https://unpkg.com/kokomi.js@1.9.78/build/kokomi.umd.js',type:'module' },
-                    //     // 标签名
-                    //     tag: 'script',
-                    // },
+                    {
+                        // 放到 body 末尾，可取值还有`head`|`head-prepend`|`body-prepend`，顾名思义
+                        injectTo: 'body',
+                        // 标签属性定义
+                        attrs: { src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/SplitText3.min.js' },
+                        // 标签名
+                        tag: 'script',
+                    },
                     // {
                     //     // 放到 body 末尾，可取值还有`head`|`head-prepend`|`body-prepend`，顾名思义
                     //     injectTo: 'body',

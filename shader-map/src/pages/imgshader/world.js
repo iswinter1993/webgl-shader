@@ -2,12 +2,18 @@ import * as kokomi from "kokomi.js";
 import * as THREE from "three";
 import Slider from "./slider.js";
 import gsap from "gsap";
+
+gsap.registerPlugin(SplitText);
 export default class World extends kokomi.Component {
     constructor(base) {
       super(base);
   
       this.base.am.on("ready", async () => {
-        
+        var split = new SplitText("#el");
+        var split1 = new SplitText("#el1");
+        var splitTextTimeline = gsap.timeline()
+        gsap.set('#el', {perspective:400,opacity:0});
+        gsap.set('#el1', {perspective:400,opacity:0});
         this.slider = new Slider(this.base);
         await this.slider.addExisting();
 
@@ -40,6 +46,12 @@ export default class World extends kokomi.Component {
                 delay: 0.5,
                 onUpdate() {
                   if (this.progress() >= 0.5) {
+                      splitTextTimeline.clear().time(0);
+                      split.revert();
+                    split.split({type:"chars, words"})
+                    split1.split({type:'words'})
+                    splitTextTimeline.from(split.chars, {duration: 0.6, scale:4, autoAlpha:0, rotationX:-180,transformOrigin:"100% 50%", ease:"back", stagger: 0.02});
+                    splitTextTimeline.from(split1.words,{duration: 0.6,autoAlpha:0,y:100},0.3)
                     that.currentActiveMesh = maku.mesh;
                   }
                 },
@@ -59,7 +71,12 @@ export default class World extends kokomi.Component {
                 if (this.progress() >= 0.5) {
                   that.slider.ws.enable();
                   that.slider.dd.enable();
-  
+                  splitTextTimeline.clear().time(0);
+                      split.revert();
+                    split.split({type:"chars, words"})
+                    split1.split({type:'words'})
+                    splitTextTimeline.to(split.chars, {duration: 0.6, scale:4, autoAlpha:0, rotationX:-180,transformOrigin:"100% 50%", ease:"back", stagger: 0.02});
+                    splitTextTimeline.to(split1.words,{duration: 0.6,autoAlpha:0,y:100},0.3)
                   that.currentActiveMesh = null;
                 }
               },
@@ -77,4 +94,5 @@ export default class World extends kokomi.Component {
         document.querySelector(".loader-screen")?.classList.add("hollow");
       });
     }
+    
   }
