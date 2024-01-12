@@ -19,6 +19,16 @@ const routes: Array<RouteRecordRaw> = [
         requireAuth: true
         },
         component: () => import('@/pages/imgshader/index.vue')
+    },
+    {
+        path: '/ball',
+        name: 'ball',
+        meta: {
+        title: 'ball',
+        keepAlive: true,
+        requireAuth: true
+        },
+        component: () => import('@/pages/waterball/index.vue')
     }
 
 ]
