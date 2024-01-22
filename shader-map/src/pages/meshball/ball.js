@@ -34,7 +34,7 @@ export default class MeshBall extends kokomi.Component {
 					objectCSS.position.x = Math.random() * 4000 - 2000;
 					objectCSS.position.y = Math.random() * 4000 - 2000;
 					objectCSS.position.z = Math.random() * 4000 - 2000;
-          this.container.add(objectCSS)
+          this.base.scene.add(objectCSS)
           objects.push( objectCSS );
           const object = new THREE.Object3D();
 					object.position.x = ( (i + 3 ) * 140 ) - 1330;
@@ -55,7 +55,7 @@ export default class MeshBall extends kokomi.Component {
 
 					const object = new THREE.Object3D();
 
-					object.position.setFromSphericalCoords( 800, phi, theta );
+					object.position.setFromSphericalCoords(  objects.length*5, phi, theta );
 
 					vector.copy( object.position ).multiplyScalar( 2 );
 
@@ -70,6 +70,15 @@ export default class MeshBall extends kokomi.Component {
       document.getElementById( 'container' ).appendChild( this.base.renderer.domElement );
 
 
+
+      const controls = new TrackballControls( this.base.camera, this.base.renderer.domElement );
+      
+      this.controls = controls
+      // this.controls.update()
+
+      this.controls.minDistance=500
+      this.controls.maxDistance=8000
+
       const buttonTable = document.getElementById( 'table' );
 				buttonTable.addEventListener( 'click', () => {
 
@@ -82,11 +91,11 @@ export default class MeshBall extends kokomi.Component {
 					this.transform( this.targets.sphere, 2000 );
 
 				} );
-        this.base.controls.controls.addEventListener( 'change', (v)=>{
-          console.log(v)
-          this.render()
-        } );
-      // this.transform( this.targets.table, 2000 );
+        // this.base.controls.addEventListener( 'change', (v)=>{
+        //   console.log(v)
+        //   this.render()
+        // } );
+      this.transform( this.targets.sphere, 2000 );
 
       // const geometry = new THREE.BufferGeometry();
       // geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
@@ -125,12 +134,13 @@ export default class MeshBall extends kokomi.Component {
     
     // this.container.add( this.points );
     // this.render()
-    
+    // this.controls.update()
   }
   update() {
     this.onWindowResize()
+    this.controls.update()
     TWEEN.update();
-    // this.render()
+    this.render()
     
   }
   transform( targets, duration ) {
@@ -162,7 +172,7 @@ export default class MeshBall extends kokomi.Component {
   }
   render() {
 
-    this.base.renderer.render( this.container, this.base.camera );
+    this.base.renderer.render( this.base.scene, this.base.camera );
 
   }
    onWindowResize() {

@@ -29,12 +29,14 @@ constructor(sel = "#sketch3") {
   super(sel);
   window.experienceMeshballWorld = this;
 
-  const controls = new kokomi.OrbitControls(this);
-  this.controls = controls
-  this.camera.position.set(0, 0, 3000);
-  controls.controls.minDistance=500
-  controls.controls.maxDistance=6000
 
+  this.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+	this.camera.position.z = 3000;
+	this.scene = new THREE.Scene();
+
+  
+  
+  this.camera.position.set(0, 0, 3000);
   
 
   this.tabledata=tabledata
@@ -51,7 +53,7 @@ constructor(sel = "#sketch3") {
 onMounted(() => {
 // init();
 // 		animate();
-new ExperienceMeshballWorld("#container");
+new ExperienceMeshballWorld();
 // const ske = new Sketch('#sketch3')
 // ske.create()
 });
