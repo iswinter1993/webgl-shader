@@ -9,4 +9,4 @@
 <img src='./shader-map/public/1705285057210.jpg'/>
 
 ## css3Drender element球动画
-<img src='./shader-map/public/1705917049537.jpg' />
+<img src='./shader-map/public/1705917049537.png' />
