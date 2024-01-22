@@ -13,15 +13,11 @@
 </template>
 <script lang="ts" setup>
 import * as kokomi from "kokomi.js";
-import MeshBallWorld from "@/pages/meshball/world.js";
-import { onMounted, reactive } from "vue";
+import { onMounted } from "vue";
 import { tabledata } from "./data.js";
 import * as THREE from "three";
 import _ from "lodash";
 import MeshBall from "./ball.js";
-import TWEEN from "three/addons/libs/tween.module.js";
-import { TrackballControls } from "three/addons/controls/TrackballControls.js";
-import { CSS3DRenderer, CSS3DObject } from "three/addons/renderers/CSS3DRenderer.js";
 
 class ExperienceMeshballWorld extends kokomi.Base {
   constructor(sel = "#sketch3") {
