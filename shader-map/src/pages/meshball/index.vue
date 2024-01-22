@@ -6,56 +6,48 @@
     <button id="grid">GRID</button>
   </div>
   <div id="container">
-  <!-- <div v-for="(item,i) in tabledata" :class="'element '+ 'element'+i">
+    <!-- <div v-for="(item,i) in tabledata" :class="'element '+ 'element'+i">
     <div class="symbol">{{ item }}</div>
   </div> -->
   </div>
-
 </template>
 <script lang="ts" setup>
 import * as kokomi from "kokomi.js";
 import MeshBallWorld from "@/pages/meshball/world.js";
-import { onMounted,reactive  } from "vue";
-import {tabledata} from './data.js'
-import * as THREE from 'three';
+import { onMounted, reactive } from "vue";
+import { tabledata } from "./data.js";
+import * as THREE from "three";
 import _ from "lodash";
-import MeshBall from './ball.js'
-import TWEEN from 'three/addons/libs/tween.module.js';
-import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
-import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
+import MeshBall from "./ball.js";
+import TWEEN from "three/addons/libs/tween.module.js";
+import { TrackballControls } from "three/addons/controls/TrackballControls.js";
+import { CSS3DRenderer, CSS3DObject } from "three/addons/renderers/CSS3DRenderer.js";
 
 class ExperienceMeshballWorld extends kokomi.Base {
-constructor(sel = "#sketch3") {
-  super(sel);
-  window.experienceMeshballWorld = this;
+  constructor(sel = "#sketch3") {
+    super(sel);
+    window.experienceMeshballWorld = this;
 
+    this.camera = new THREE.PerspectiveCamera(
+      40,
+      window.innerWidth / window.innerHeight,
+      1,
+      10000
+    );
+    this.camera.position.z = 3000;
+    this.scene = new THREE.Scene();
 
-  this.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
-	this.camera.position.z = 3000;
-	this.scene = new THREE.Scene();
+    this.camera.position.set(0, 0, 3000);
 
-  
-  
-  this.camera.position.set(0, 0, 3000);
-  
-
-  this.tabledata=tabledata
-  const meshBall = new MeshBall(this)
-  meshBall.addExisting()
-  console.log(this)
-  // meshBall.update(()=>{
-  //   this.renderer.render(this.scene, this.camera);
-  // })
-
-}
+    this.tabledata = tabledata;
+    const meshBall = new MeshBall(this);
+    meshBall.addExisting();
+    console.log(this);
+  }
 }
 
 onMounted(() => {
-// init();
-// 		animate();
-new ExperienceMeshballWorld();
-// const ske = new Sketch('#sketch3')
-// ske.create()
+  new ExperienceMeshballWorld();
 });
 // const table = [
 // 				'H', 'Hydrogen', '1.00794', 1, 1,
@@ -183,8 +175,6 @@ new ExperienceMeshballWorld();
 
 // 			const objects = [];
 // 			const targets = { table: [], sphere: [], helix: [], grid: [] };
-
-			
 
 // 			function init() {
 
@@ -399,98 +389,98 @@ new ExperienceMeshballWorld();
 // })
 </script>
 <style lang="less">
-
-#sketch3,#container {
-canvas{
-  position: fixed;
-  display: none;
-}
-// overflow: hidden;
-background: black;
+#sketch3,
+#container {
+  canvas {
+    position: fixed;
+    display: none;
+  }
+  // overflow: hidden;
+  background: black;
 }
 a {
-color: #8ff;
+  color: #8ff;
 }
 
 #menu {
-position: absolute;
-bottom: 20px;
-width: 100%;
-text-align: center;
-z-index: 100;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
 }
-.elbox{
-position: absolute;
-width: 100%;
-height: 100vh;
-z-index: 3;
+.elbox {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 3;
 }
 .element {
   width: 120px;
-				height: 160px;
-				box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
-				border: 1px solid rgba(127,255,255,0.25);
-				font-family: Helvetica, sans-serif;
-				text-align: center;
-				line-height: normal;
-				cursor: default;
-        // position: absolute;
-        // top: 0;
-        // left: 0;
-        // pointer-events: auto;
-        // transform: translate(var(--x), var(--y));
+  height: 160px;
+  box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
+  border: 1px solid rgba(127, 255, 255, 0.25);
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+  line-height: normal;
+  cursor: default;
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  // pointer-events: auto;
+  // transform: translate(var(--x), var(--y));
 
-        // z-index: var(--z-index);
+  // z-index: var(--z-index);
 }
 
 .element:hover {
-box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.75);
-border: 1px solid rgba(127, 255, 255, 0.75);
+  box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.75);
+  border: 1px solid rgba(127, 255, 255, 0.75);
 }
 
 .element .number {
-position: absolute;
-top: 20px;
-right: 20px;
-font-size: 12px;
-color: rgba(127, 255, 255, 0.75);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 12px;
+  color: rgba(127, 255, 255, 0.75);
 }
 
 .element .symbol {
-position: absolute;
-top: 40px;
-left: 0px;
-right: 0px;
-font-size: 60px;
-font-weight: bold;
-color: rgba(255, 255, 255, 0.75);
-text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
+  position: absolute;
+  top: 40px;
+  left: 0px;
+  right: 0px;
+  font-size: 60px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.75);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
 }
 
 .element .details {
-position: absolute;
-bottom: 15px;
-left: 0px;
-right: 0px;
-font-size: 12px;
-color: rgba(127, 255, 255, 0.75);
+  position: absolute;
+  bottom: 15px;
+  left: 0px;
+  right: 0px;
+  font-size: 12px;
+  color: rgba(127, 255, 255, 0.75);
 }
 
 button {
-color: rgba(127, 255, 255, 0.75);
-background: transparent;
-outline: 1px solid rgba(127, 255, 255, 0.75);
-border: 0px;
-padding: 5px 10px;
-cursor: pointer;
+  color: rgba(127, 255, 255, 0.75);
+  background: transparent;
+  outline: 1px solid rgba(127, 255, 255, 0.75);
+  border: 0px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 button:hover {
-background-color: rgba(0, 255, 255, 0.5);
+  background-color: rgba(0, 255, 255, 0.5);
 }
 
 button:active {
-color: #000000;
-background-color: rgba(0, 255, 255, 0.75);
+  color: #000000;
+  background-color: rgba(0, 255, 255, 0.75);
 }
 </style>
