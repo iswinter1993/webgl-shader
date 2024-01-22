@@ -29,6 +29,16 @@ const routes: Array<RouteRecordRaw> = [
         requireAuth: true
         },
         component: () => import('@/pages/waterball/index.vue')
+    },
+    {
+        path: '/mesh',
+        name: 'mesh',
+        meta: {
+        title: 'mesh',
+        keepAlive: true,
+        requireAuth: true
+        },
+        component: () => import('@/pages/meshball/index.vue')
     }
 
 ]
